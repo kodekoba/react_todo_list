@@ -32,10 +32,11 @@ class App extends Component {
   }
 
   // Delete 
-  delTodo = (id) => { //feaux way of deleting, we have no database
-    this.setState({
-      todos:[...this.state.todos.filter(todo => todo.id !== id)]
-    })
+  delTodo = (id) => { //feaux way of deleting, we have no database // now trying to "ping" the api for deletion
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => this.setState({
+        todos:[...this.state.todos.filter(todo => todo.id !== id)]
+      }))
   }
 
   addTodo = (title) => {
